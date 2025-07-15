@@ -1,9 +1,9 @@
 # SnakeGame
 
-**A classic Snake arcade game rebuilt in C# WinForms.**  
-Eat, grow, avoid walls—and your own tail.
+**A classic Snake arcade game built in C# WinForms.**  
+Eat, grow, avoid walls — and your own tail.
 
-![Start window](images/main-screen.png)
+![Game window](images/game-window.png)
 
 ---
 
@@ -20,7 +20,7 @@ Eat, grow, avoid walls—and your own tail.
 
 - **C#**
 - **Windows Forms (WinForms)**
-- **.NET Framework 4.7.2**
+- **.NET Framework 4.8**
 
 ---
 
