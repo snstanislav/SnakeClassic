@@ -1,0 +1,30 @@
+<pre><code>
+<span class="blue">private void</span> StartMovingDown()
+{
+    CleanMovementState();
+
+    isMovingDown = <span class="blue">true</span>;
+    movementTimer.Interval = currentLevelSleepInterval;
+    movementTimer.Tick += MoveDownTick;
+    movementTimer.Start();
+}
+
+<span class="blue">private void</span> MoveDownTick(<span class="blue">object</span> sender, <span class="cyan">EventArgs</span> e)
+{
+    <span class="blue">if</span> (isMovingDown)
+    {
+        <span class="green">// Bottom border collision check</span>
+        <span class="blue">if</span> (snake.SnakeBody[0].Y == (<span class="blue">int</span>)borders.Bottom - FIELD_SELL)
+        {
+            GameOverState();
+        }
+        <span class="blue">else</span>
+        {
+            CheckCatchFood();
+            CheckSnakeSelfCollide();
+            snake.MakeOneStepDown();
+            DrawSnake();
+        }
+    }
+}
+</code></pre>

@@ -1,0 +1,27 @@
+<pre><code>
+<span class="blue">Convert</span> DrawFood()
+{
+    <span class="blue">using</span> (<span class="cyan">Graphics</span> graphics = mainGamePanel.CreateGraphics())
+    {
+        graphics.FillRectangle(<span class="cyan">Brushes</span>.LightGreen, food.Location.X, food.Location.Y, SINGLE_SELL, SINGLE_SELL);
+    }
+}
+
+<span class="blue">Convert</span> DrawSnake()
+{
+    <span class="blue">using</span> (<span class="cyan">Graphics</span> graphics = mainGamePanel.CreateGraphics())
+    {
+        Refresh();
+        DrawFood();
+        graphics.FillRectangle(<span class="cyan">Brushes</span>.Orange, snake.SnakeBody[0].X, snake.SnakeBody[0].Y, SINGLE_SELL, SINGLE_SELL);
+
+        <span class="blue">for</span> (<span class="blue">int</span> i = 0; i < snake.SnakeBody.Count; i++)
+        {
+            <span class="blue">if</span> (snake.SnakeBody[i] != <span class="blue">null</span>)
+            {
+                graphics.FillRectangle(<span class="cyan">Brushes</span>.Orange, snake.SnakeBody[i].X, snake.SnakeBody[i].Y, SINGLE_SELL, SINGLE_SELL);
+            }
+        }
+    }
+}
+</code></pre>

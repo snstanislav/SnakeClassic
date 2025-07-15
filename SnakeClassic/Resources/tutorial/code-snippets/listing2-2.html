@@ -1,0 +1,35 @@
+<pre><code>
+<span class="blue"><span class="blue">private void</span></span> CheckSnakeSelfCollide()
+{
+    <span class="blue">if</span> (snake.IsSelfCollided())
+    {
+        GameOverState();
+    }
+}
+
+<span class="blue"><span class="blue">private void</span></span> CheckCatchFood()
+{
+    <span class="blue">if</span> (snake.IsFoodCatched(food.Location))
+    {
+        snake.GrowSnake();
+        IncreaseScore();
+        ManageNewFoodLocation();
+    }
+}
+
+<span class="blue"><span class="blue">private void</span></span> ManageNewFoodLocation()
+{
+    food.GenerateNewFoodLocation((<span class="blue">int</span>)borders.Top, (<span class="blue">int</span>)borders.Bottom, (<span class="blue">int</span>)borders.Left, (<span class="blue">int</span>)borders.Right, FIELD_SELL);
+    <span class="blue">if</span> (snake.IsNewFoodAppearsOnSnakeBody(food.Location))
+    {
+        ManageNewFoodLocation();
+    }
+}
+
+<span class="blue">private void</span> IncreaseScore()
+{
+    <span class="blue">int</span> currentScore = <span class="cyan">Convert</span>.ToInt32(scoreValueLabel.Text);
+    currentScore++;
+    scoreValueLabel.Text = <span class="cyan">Convert</span>.ToString(currentScore);
+}
+</code></pre>

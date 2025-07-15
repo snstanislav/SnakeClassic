@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 11pt;
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 14pt;
+    color: #000;
+    background: #fff;
+}
+
+h1 {
+    margin: 15px;
+    text-align: left;
+    font-size: 13pt;
+    color: black;
+}
+
+h2 {
+    margin:  20px 0 5px;
+    padding: 7px 15px;
+    text-align: left;
+    font-size: 11pt;
+    color: #fff;
+    background: #8b0000;
+}
+
+h3 {
+    margin: 20px 20px 5px;
+    text-align: left;
+    font-size: 11pt;
+    font-style: italic;
+    color: #b8860b;
+}
+
+a {
+    margin: 0;
+    text-align: left;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: #00f;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: underline;
+    color: #f00;
+}
+
+p {
+    padding: 0 25px;
+    text-align: justify;
+}
+
+div {
+    padding: 0 25px;
+    text-align: justify;
+}
+
+nav ul li {
+    list-style: circle;
+}
+
+figure {
+    display: table;
+    margin: 10px auto;
+    text-align: center;
+}
+
+figure img {
+    display: block;
+    width: auto;
+}
+
+figure figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    padding: 10px 0;
+    font-style: italic;
+    font-size: 10pt;
+    color: #555;
+}
+
+.logo {
+    margin: 0;
+}
+
+.blue {
+    color: #0000ff
+}
+
+.cyan {
+    color: #008b8b
+}
+
+.green {
+    color: #008000
+}
+
+.darkred {
+    color: #8b0000
+}
+
+pre {
+    margin: 10px;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+}
+
+code {
+    font-family: Consolas, 'Courier New', Courier, monospace, Arial, Verdana, sans-serif;
+}
+
+code.inline {
+    padding: 0 4px;
+    font-weight: bold;
+    font-size: 11pt;
+    border: 1px dashed #bbb;
+    border-radius: 2px;
+    background: #eee;
+}
+
+var {
+    font-weight: bold;
+    font-style: normal;
+    color: #555;
+}
+
+kbd {
+    padding: 0 6px;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+}

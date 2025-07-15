@@ -1,0 +1,45 @@
+<pre><code>
+<span class="blue">private void</span> GameForm_KeyDown(<span class="blue">object</span> sender, <span class="cyan">KeyEventArgs</span> e)
+{
+    <span class="blue">if</span> (isKeyPressAllowed)
+    {
+        <span class="blue">if</span> ((e.KeyCode == <span class="cyan">Keys</span>.Up || e.KeyCode == <span class="cyan">Keys</span>.W) && snake.SnakeBody[0].Y <= snake.SnakeBody[1].Y)
+        {
+            StartMovingUp();
+            <span class="blue">if</span> (movementTimer.Enabled)
+            {
+                pauseLabel.Text = PAUSE_MSG;
+            }
+        }
+        <span class="blue">if</span> ((e.KeyCode == <span class="cyan">Keys</span>.Down || e.KeyCode == <span class="cyan">Keys</span>.S) && snake.SnakeBody[0].Y >= snake.SnakeBody[1].Y)
+        {
+            StartMovingDown();
+            <span class="blue">if</span> (movementTimer.Enabled)
+            {
+                pauseLabel.Text = PAUSE_MSG;
+            }
+        }
+        <span class="blue">if</span> ((e.KeyCode == <span class="cyan">Keys</span>.Left || e.KeyCode == <span class="cyan">Keys</span>.A) && snake.SnakeBody[0].X <= snake.SnakeBody[1].X)
+        {
+            StartMovingLeft();
+            <span class="blue">if</span> (movementTimer.Enabled)
+            {
+                pauseLabel.Text = PAUSE_MSG;
+            }
+        }
+        <span class="blue">if</span> ((e.KeyCode == <span class="cyan">Keys</span>.Right || e.KeyCode == <span class="cyan">Keys</span>.D) && snake.SnakeBody[0].X >= snake.SnakeBody[1].X)
+        {
+            StartMovingRight();
+            <span class="blue">if</span> (movementTimer.Enabled)
+            {
+                pauseLabel.Text = PAUSE_MSG;
+            }
+        }
+        <span class="blue">if</span> (e.KeyCode == <span class="cyan">Keys</span>.Space && movementTimer.Enabled)
+        {
+            pauseLabel.Text = CONTINUE_MSG;
+            movementTimer.Stop();
+        }
+    }
+}
+</code></pre>

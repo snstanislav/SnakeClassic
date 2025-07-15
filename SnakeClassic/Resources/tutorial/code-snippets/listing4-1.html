@@ -1,0 +1,47 @@
+<pre><code>
+<span class="blue">private void</span> cleanRecordToolStripMenuItem_Click(<span class="blue">object</span> sender, <span class="cyan">EventArgs</span> e)
+{
+    <span class="blue">var</span> confirmResult = <span class="cyan">MessageBox</span>.Show(<span class="darkred">"\tAre you sure??"</span>, <span class="darkred">"Confirm Delete!"</span>, <span class="cyan">MessageBoxButtons</span>.YesNo);
+    <span class="blue">if</span> (confirmResult == <span class="cyan">DialogResult</span>.Yes)
+    {
+        Properties.<span class="cyan">Settings</span>.Default.BestScore = 0;
+        Properties.<span class="cyan">Settings</span>.Default.Save();
+        recordValueLabel.Text = <span class="darkred">"0"</span>;
+    }
+    movementTimer.Start();
+}
+
+<span class="blue">private void</span> gameToolStripMenuItem_Click(<span class="blue">object</span> sender, <span class="cyan">EventArgs</span> e)
+{
+    <span class="blue">if</span> (isKeyPressAllowed)
+    {
+        movementTimer.Stop();
+        pauseLabel.Text = CONTINUE_MSG;
+    }
+}
+
+<span class="blue">private void</span> GameForm_FormClosing(<span class="blue">object</span> sender, FormClosingEventArgs e)
+{
+    <span class="blue">if</span> (isKeyPressAllowed)
+    {
+        movementTimer.Stop();
+        <span class="blue">var</span> confirmResult = <span class="cyan">MessageBox</span>.Show(<span class="darkred">"\tDo you really want to interrupt the game?"</span>, <span class="darkred">"Confirm Exit!"</span>, <span class="cyan">MessageBoxButtons</span>.YesNo);
+        <span class="blue">if</span> (confirmResult == <span class="cyan">DialogResult</span>.Yes)
+        {
+            GameOverState();
+            Close();
+        }
+        <span class="blue">else if</span> (confirmResult == <span class="cyan">DialogResult</span>.No)
+        {
+            e.Cancel = true;
+            movementTimer.Start();
+            pauseLabel.Text = PAUSE_MSG;
+        }
+    }
+}
+
+<span class="blue">private void</span> GameForm_Load(<span class="blue">object</span> sender, <span class="cyan">EventArgs</span> e)
+{
+    recordValueLabel.Text = Properties.<span class="cyan">Settings</span>.Default.BestScore.ToString();
+}
+</code></pre>

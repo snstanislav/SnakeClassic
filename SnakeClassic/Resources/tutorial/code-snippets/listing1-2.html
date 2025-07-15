@@ -1,0 +1,20 @@
+<pre><code>
+class <span class="cyan">Food</span>
+{
+    <span class="blue">private</span> <span class="cyan">Random</span> random;
+    <span class="blue">public</span> <span class="cyan">LocationPoint</span> Location {<span class="blue">get</span>; <span class="blue">set</span>; }
+
+    <span class="blue">public</span> <span class="cyan">Food</span>(<span class="blue">int</span> top, <span class="blue">int</span> bottom, <span class="blue">int</span> left, <span class="blue">int</span> right, <span class="blue">int</span> singleSellSize)
+    {
+        <span class="blue">this</span>.random = new <span class="cyan">Random</span>();
+        <span class="blue">this</span>.Location = new <span class="cyan">LocationPoint</span>(0, 0);
+        GenerateNewFoodLocation(top, bottom, left, right, singleSellSize);
+    }
+
+    <span class="blue">public void</span> GenerateNewFoodLocation(<span class="blue">int</span> top, <span class="blue">int</span> bottom, <span class="blue">int</span> left, <span class="blue">int</span> right, <span class="blue">int</span> singleSellSize)
+    {
+        <span class="blue">this</span>.Location.X = <span class="cyan">Convert</span>.ToInt32(random.Next(left, right - singleSellSize) / singleSellSize) * singleSellSize;
+        <span class="blue">this</span>.Location.Y = <span class="cyan">Convert</span>.ToInt32(random.Next(top, bottom - singleSellSize) / singleSellSize) * singleSellSize;
+    }
+}
+</code></pre>

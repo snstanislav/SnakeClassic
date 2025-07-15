@@ -1,0 +1,48 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug*/
+[Rr]elease*/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio folders
+.vs/
+.vscode/
+
+# NuGet packages
+*.nupkg
+packages/
+!packages/build/
+
+# Test results
+TestResult.xml
+*.coverage
+*.coveragexml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+
+# ReSharper and other IDE extensions
+_ReSharper*/
+*.DotSettings.user
+
+# Publish output
+publish/
+*.publish.xml
+*.azurePubxml
+
+# Windows-specific
+Thumbs.db
+Desktop.ini
+
+# Others
+*.exe
+*.dll
+*.pdb

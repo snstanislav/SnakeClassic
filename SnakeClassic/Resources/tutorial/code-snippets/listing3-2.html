@@ -1,0 +1,48 @@
+<pre><code>
+<span class="blue">private void</span> startToolStripMenuItem_Click(<span class="blue">object</span> sender, <span class="cyan">EventArgs</span> e)
+{
+    movementTimer = <span class="blue">new</span> <span class="cyan">Timer</span>();
+    <span class="cyan">LevelForm</span> levelForm = <span class="blue">new</span> <span class="cyan">LevelForm</span>();
+    levelForm.ShowDialog();
+
+    <span class="blue">switch</span> (levelForm.SelectedLevel)
+    {
+        <span class="blue">case</span> <span class="cyan">LevelForm</span>.LEVEL_1:
+            currentLevelSleepInterval = (<span class="blue">int</span>)LevelSleepInterval.First;
+            levelValueLabel.Text = <span class="cyan">LevelForm</span>.LEVEL_1;
+            <span class="blue">break</span>;
+        <span class="blue">case</span> <span class="cyan">LevelForm</span>.LEVEL_2:
+            currentLevelSleepInterval = (<span class="blue">int</span>)LevelSleepInterval.Second;
+            levelValueLabel.Text = <span class="cyan">LevelForm</span>.LEVEL_2;
+            <span class="blue">break</span>;
+        <span class="blue">case</span> <span class="cyan">LevelForm</span>.LEVEL_3:
+            currentLevelSleepInterval = (<span class="blue">int</span>)LevelSleepInterval.Third;
+            levelValueLabel.Text = <span class="cyan">LevelForm</span>.LEVEL_3;
+            <span class="blue">break</span>;
+        <span class="blue">case</span> <span class="cyan">LevelForm</span>.LEVEL_4:
+            currentLevelSleepInterval = (<span class="blue">int</span>)LevelSleepInterval.Fourth;
+            levelValueLabel.Text = <span class="cyan">LevelForm</span>.LEVEL_4;
+            <span class="blue">break</span>;
+        <span class="blue">case</span> <span class="cyan">LevelForm</span>.LEVEL_5:
+            currentLevelSleepInterval = (<span class="blue">int</span>)LevelSleepInterval.Fifth;
+            levelValueLabel.Text = <span class="cyan">LevelForm</span>.LEVEL_5;
+            <span class="blue">break</span>;
+        <span class="blue">case</span> <span class="cyan">LevelForm</span>.LEVEL_6:
+            currentLevelSleepInterval = (<span class="blue">int</span>)LevelSleepInterval.Sixth;
+            levelValueLabel.Text = <span class="cyan">LevelForm</span>.LEVEL_6;
+            <span class="blue">break</span>;
+        <span class="blue">default</span>:
+            currentLevelSleepInterval = (<span class="blue">int</span>)LevelSleepInterval.First;
+            levelValueLabel.Text = <span class="cyan">LevelForm</span>.LEVEL_1;
+            <span class="blue">break</span>;
+    }
+
+    InitSnake();
+    DrawSnake();
+    isKeyPressAllowed = <span class="blue">true</span>;
+    cleanRecordToolStripMenuItem.Enabled = <span class="blue">false</span>;
+    <span class="green">// Initial movement direction</span>
+    StartMovingUp();
+    pauseLabel.Text = PAUSE_MSG;
+}
+</code></pre>

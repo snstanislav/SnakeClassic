@@ -1,0 +1,71 @@
+<pre><code>
+<span class="cyan">Food</span> food;
+<span class="cyan">Snake</span> snake;
+<span class="blue">private</span> <span class="cyan">Timer</span> movementTimer = <span class="blue">new</span> <span class="cyan">Timer</span>();
+<span class="blue">private enum</span> LevelSleepInterval : <span class="blue">int</span> { First = 400, Second = 300, Third = 200, Fourth = 150, Fifth = 100, Sixth = 50 }
+<span class="blue">private int</span> currentLevelSleepInterval;
+<span class="blue">private bool</span> isKeyPressAllowed = <span class="blue">false</span>;
+<span class="blue">private bool</span> isMovingUp = <span class="blue">false</span>;
+<span class="blue">private bool</span> isMovingDown = <span class="blue">false</span>;
+<span class="blue">private bool</span> isMovingLeft = <span class="blue">false</span>;
+<span class="blue">private bool</span> isMovingRight = <span class="blue">false</span>;
+
+<span class="blue">private enum</span> borders : <span class="blue">int</span> { Top = 0, Bottom = 600, Left = 0, Right = 600 }
+<span class="blue">private const int</span> FIELD_SELL = 20;
+<span class="blue">private const int</span> SINGLE_SELL = 18;
+<span class="blue">private const string</span> PAUSE_MSG = <span class="darkred">"Press Space to pause"</span>;
+<span class="blue">private const string</span> CONTINUE_MSG = <span class="darkred">"Press control key to continue"</span>;
+
+<span class="blue">public</span> <span class="cyan">GameForm</span>()
+{
+    InitializeComponent();
+    mainGamePanel.Width = (<span class="blue">int</span>)borders.Right;
+    mainGamePanel.Height = (<span class="blue">int</span>)borders.Bottom;
+    mainGamePanel.BackColor = <span class="cyan">Color</span>.Black;
+    scoreValueLabel.Text = <span class="darkred">"0"</span>;
+    food = <span class="blue">new</span> <span class="cyan">Food</span>((<span class="blue">int</span>)borders.Top, (<span class="blue">int</span>)borders.Bottom, (<span class="blue">int</span>)borders.Left, (<span class="blue">int</span>)borders.Right, FIELD_SELL);
+    InitSnake();
+}
+
+<span class="blue">private void</span> InitSnake()
+{
+    snake = <span class="blue">new</span> <span class="cyan">Snake</span>(3, 100, 200, FIELD_SELL);
+}
+
+<span class="blue">private void</span> CleanMovementState()
+{
+    movementTimer.Tick -= MoveUpTick;
+    movementTimer.Tick -= MoveDownTick;
+    movementTimer.Tick -= MoveLeftTick;
+    movementTimer.Tick -= MoveRightTick;
+    isMovingUp = <span class="blue">false</span>;
+    isMovingDown = <span class="blue">false</span>;
+    isMovingRight = <span class="blue">false</span>;
+    isMovingLeft = <span class="blue">false</span>;
+}
+
+<span class="blue">private void</span> GameOverState()
+{
+    movementTimer.Stop();
+    CleanMovementState();
+    isKeyPressAllowed = <span class="blue">false</span>;
+    ProcessGameResult();
+    cleanRecordToolStripMenuItem.Enabled = <span class="blue">true</span>;
+    levelValueLabel.Text = <span class="darkred">"  "</span>;
+    scoreValueLabel.Text = <span class="darkred">"0"</span>;
+    pauseLabel.Text = <span class="darkred">"GAME OVER"</span>;
+}
+
+<span class="blue">private void</span> ProcessGameResult()
+{
+    <span class="blue">string</span> resutlMsg = <span class="darkred">$"\tGAME OVER!\n\n\t Score: {scoreValueLabel.Text}"</span>;
+    <span class="blue">if</span> (Properties.<span class="cyan">Settings</span>.Default.BestScore < <span class="cyan">Int32</span>.Parse(scoreValueLabel.Text))
+    {
+        Properties.<span class="cyan">Settings</span>.Default.BestScore = <span class="cyan">Int32</span>.Parse(scoreValueLabel.Text);
+        Properties.<span class="cyan">Settings</span>.Default.Save();
+        recordValueLabel.Text = Properties.<span class="cyan">Settings</span>.Default.BestScore.ToString();
+        resutlMsg += <span class="darkred">"\n\n\tCongrats! You've got a new record"</span>;
+    }
+    <span class="cyan">MessageBox</span>.Show(resutlMsg);
+}
+</code></pre>
