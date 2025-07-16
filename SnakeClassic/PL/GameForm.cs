@@ -11,7 +11,7 @@ namespace SnakeClassic.PL
         Food food;
         Snake snake;
         private Timer movementTimer = new Timer();
-        private enum LevelSleepInterval :   int
+        private enum LevelSleepInterval : int
         { First = 400, Second = 300, Third = 200, Fourth = 150, Fifth = 100, Sixth = 50 }
         private int currentLevelSleepInterval;
         private bool isKeyPressAllowed = false;
@@ -44,7 +44,7 @@ namespace SnakeClassic.PL
             snake = new Snake(3, 100, 200, FIELD_SELL);
         }
 
-        private void CleanMovementState()
+        private void ClearMovementState()
         {
             movementTimer.Tick -= MoveUpTick;
             movementTimer.Tick -= MoveDownTick;
@@ -58,10 +58,10 @@ namespace SnakeClassic.PL
         private void GameOverState()
         {
             movementTimer.Stop();
-            CleanMovementState();
+            ClearMovementState();
             isKeyPressAllowed = false;
             ProcessGameResult();
-            cleanRecordToolStripMenuItem.Enabled = true;
+            clearRecordToolStripMenuItem.Enabled = true;
             levelValueLabel.Text = "  ";
             scoreValueLabel.Text = "0";
             pauseLabel.Text = "GAME OVER";
@@ -142,7 +142,7 @@ namespace SnakeClassic.PL
 
         private void StartMovingUp()
         {
-            CleanMovementState();
+            ClearMovementState();
 
             isMovingUp = true;
             movementTimer.Interval = currentLevelSleepInterval;
@@ -154,6 +154,8 @@ namespace SnakeClassic.PL
         {
             if (isMovingUp)
             {
+                CheckCatchFood();
+                CheckSnakeSelfCollide();
                 // Top border collision check
                 if (snake.SnakeBody[0].Y == (int)borders.Top)
                 {
@@ -161,8 +163,6 @@ namespace SnakeClassic.PL
                 }
                 else
                 {
-                    CheckCatchFood();
-                    CheckSnakeSelfCollide();
                     snake.MakeOneStepUp();
                     DrawSnake();
                 }
@@ -171,7 +171,7 @@ namespace SnakeClassic.PL
 
         private void StartMovingDown()
         {
-            CleanMovementState();
+            ClearMovementState();
 
             isMovingDown = true;
             movementTimer.Interval = currentLevelSleepInterval;
@@ -183,6 +183,8 @@ namespace SnakeClassic.PL
         {
             if (isMovingDown)
             {
+                CheckCatchFood();
+                CheckSnakeSelfCollide();
                 // Bottom border collision check
                 if (snake.SnakeBody[0].Y == (int)borders.Bottom - FIELD_SELL)
                 {
@@ -190,8 +192,6 @@ namespace SnakeClassic.PL
                 }
                 else
                 {
-                    CheckCatchFood();
-                    CheckSnakeSelfCollide();
                     snake.MakeOneStepDown();
                     DrawSnake();
                 }
@@ -199,7 +199,7 @@ namespace SnakeClassic.PL
         }
         private void StartMovingLeft()
         {
-            CleanMovementState();
+            ClearMovementState();
 
             isMovingLeft = true;
             movementTimer.Interval = currentLevelSleepInterval;
@@ -211,6 +211,8 @@ namespace SnakeClassic.PL
         {
             if (isMovingLeft)
             {
+                CheckCatchFood();
+                CheckSnakeSelfCollide();
                 // Left border collision check
                 if (snake.SnakeBody[0].X == (int)borders.Left)
                 {
@@ -218,8 +220,6 @@ namespace SnakeClassic.PL
                 }
                 else
                 {
-                    CheckCatchFood();
-                    CheckSnakeSelfCollide();
                     snake.MakeOneStepLeft();
                     DrawSnake();
                 }
@@ -228,7 +228,7 @@ namespace SnakeClassic.PL
 
         private void StartMovingRight()
         {
-            CleanMovementState();
+            ClearMovementState();
 
             isMovingRight = true;
             movementTimer.Interval = currentLevelSleepInterval;
@@ -240,6 +240,8 @@ namespace SnakeClassic.PL
         {
             if (isMovingRight)
             {
+                CheckCatchFood();
+                CheckSnakeSelfCollide();
                 // Right border collision check
                 if (snake.SnakeBody[0].X == (int)borders.Right - FIELD_SELL)
                 {
@@ -247,8 +249,6 @@ namespace SnakeClassic.PL
                 }
                 else
                 {
-                    CheckCatchFood();
-                    CheckSnakeSelfCollide();
                     snake.MakeOneStepRight();
                     DrawSnake();
                 }
@@ -344,59 +344,59 @@ namespace SnakeClassic.PL
             InitSnake();
             DrawSnake();
             isKeyPressAllowed = true;
-            cleanRecordToolStripMenuItem.Enabled = false;
+            clearRecordToolStripMenuItem.Enabled = false;
             // Initial movement direction
             StartMovingUp();
             pauseLabel.Text = PAUSE_MSG;
         }
 
-            private void cleanRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void clearRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("\tAre you sure??",
+                "Confirm Delete!", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                var confirmResult = MessageBox.Show("\tAre you sure??",
-                    "Confirm Delete!", MessageBoxButtons.YesNo);
+                Properties.Settings.Default.BestScore = 0;
+                Properties.Settings.Default.Save();
+                recordValueLabel.Text = "0";
+            }
+            movementTimer.Start();
+        }
+
+
+        private void gameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isKeyPressAllowed)
+            {
+                movementTimer.Stop();
+                pauseLabel.Text = CONTINUE_MSG;
+            }
+        }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isKeyPressAllowed)
+            {
+                movementTimer.Stop();
+                var confirmResult = MessageBox.Show("\tDo you really want to interrupt the game?",
+                    "Confirm Exit!", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    Properties.Settings.Default.BestScore = 0;
-                    Properties.Settings.Default.Save();
-                    recordValueLabel.Text = "0";
+                    GameOverState();
+                    Close();
                 }
-                movementTimer.Start();
-            }
-
-
-            private void gameToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-                if (isKeyPressAllowed)
+                else if (confirmResult == DialogResult.No)
                 {
-                    movementTimer.Stop();
-                    pauseLabel.Text = CONTINUE_MSG;
+                    e.Cancel = true;
+                    movementTimer.Start();
+                    pauseLabel.Text = PAUSE_MSG;
                 }
             }
+        }
 
-            private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
-            {
-                if (isKeyPressAllowed)
-                {
-                    movementTimer.Stop();
-                    var confirmResult = MessageBox.Show("\tDo you really want to interrupt the game?",
-                        "Confirm Exit!", MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        GameOverState();
-                        Close();
-                    }
-                    else if (confirmResult == DialogResult.No)
-                    {
-                        e.Cancel = true;
-                        movementTimer.Start();
-                        pauseLabel.Text = PAUSE_MSG;
-                    }
-                }
-            }
-
-            private void GameForm_Load(object sender, EventArgs e)
-            {
-                recordValueLabel.Text = Properties.Settings.Default.BestScore.ToString();
-            }
+        private void GameForm_Load(object sender, EventArgs e)
+        {
+            recordValueLabel.Text = Properties.Settings.Default.BestScore.ToString();
+        }
     }
 }

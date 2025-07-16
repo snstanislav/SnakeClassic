@@ -38,7 +38,7 @@
             this.gameMenuStrip = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cleanRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recordLabel = new System.Windows.Forms.Label();
             this.recordValueLabel = new System.Windows.Forms.Label();
             this.pauseLabel = new System.Windows.Forms.Label();
@@ -140,7 +140,7 @@
             // 
             this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
-            this.cleanRecordToolStripMenuItem});
+            this.clearRecordToolStripMenuItem});
             this.gameToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
             this.gameToolStripMenuItem.Padding = new System.Windows.Forms.Padding(20, 0, 20, 5);
@@ -158,15 +158,15 @@
             this.startToolStripMenuItem.Text = "Start new game";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
-            // cleanRecordToolStripMenuItem
+            // clearRecordToolStripMenuItem
             // 
-            this.cleanRecordToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cleanRecordToolStripMenuItem.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.cleanRecordToolStripMenuItem.Name = "cleanRecordToolStripMenuItem";
-            this.cleanRecordToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.cleanRecordToolStripMenuItem.Size = new System.Drawing.Size(270, 37);
-            this.cleanRecordToolStripMenuItem.Text = "Clean record";
-            this.cleanRecordToolStripMenuItem.Click += new System.EventHandler(this.cleanRecordToolStripMenuItem_Click);
+            this.clearRecordToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.clearRecordToolStripMenuItem.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.clearRecordToolStripMenuItem.Name = "clearRecordToolStripMenuItem";
+            this.clearRecordToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.clearRecordToolStripMenuItem.Size = new System.Drawing.Size(270, 37);
+            this.clearRecordToolStripMenuItem.Text = "Clear record";
+            this.clearRecordToolStripMenuItem.Click += new System.EventHandler(this.clearRecordToolStripMenuItem_Click);
             // 
             // recordLabel
             // 
@@ -304,7 +304,7 @@
         private System.Windows.Forms.Label scoreValueLabel;
         private System.Windows.Forms.Label recordLabel;
         private System.Windows.Forms.Label recordValueLabel;
-        private System.Windows.Forms.ToolStripMenuItem cleanRecordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearRecordToolStripMenuItem;
         private System.Windows.Forms.Label pauseLabel;
         private System.Windows.Forms.GroupBox controlsGroupBox;
         private System.Windows.Forms.Label rightLabel;
