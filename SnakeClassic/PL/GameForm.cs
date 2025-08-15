@@ -13,11 +13,19 @@ namespace SnakeClassic.PL
     /// </summary>
     public partial class GameForm : Form
     {
-        private const string PAUSE_MSG = "Press Space to pause";
+        /// <summary>
+        /// The message is displayed to the user when the game is paused.
+        /// </summary>
         private const string CONTINUE_MSG = "Press control key to continue";
 
         /// <summary>
+        /// The message is displayed to the user when the game is going on.
+        /// </summary>
+        private const string PAUSE_MSG = "Press Space to pause";
+
+        /// <summary>
         /// Predefined sleep intervals for different game levels.
+        /// Higher sleep interval means slower snake movement.
         /// </summary>
         private enum LevelSleepInterval : int
         { First = 400, Second = 300, Third = 200, Fourth = 150, Fifth = 100, Sixth = 50 }
@@ -25,18 +33,43 @@ namespace SnakeClassic.PL
         /// <summary>
         /// Predefined borders of the game field.
         /// </summary>
+        /// <remarks>As a future feature can be implemented the game field resizing in according to user's preferences.</remarks>
         private enum borders : int
         { Top = 0, Bottom = 600, Left = 0, Right = 600 }
 
+        /// <summary>
+        /// Instance of the <see cref="Food"/> class representing the current food object in the game.
+        /// </summary>
         private Food food;
+
+        /// <summary>
+        /// Instance of the <see cref="Snake"/> class representing the current snake object in the game.
+        /// </summary>
         private Snake snake;
 
+        /// <summary>
+        /// Interval of the current level sleep time in milliseconds.
+        /// Initialized based on the selected game level by the user.
+        /// </summary>
         private int currentLevelSleepInterval;
+
+        /// <summary>
+        /// Provides control over the key press events to allow or disallow snake movement.
+        /// </summary>
         private bool isKeyPressAllowed = false;
+
+        /// <summary>
+        /// The group of 4 flags that indicate the current movement direction of the snake.
+        /// </summary>
         private bool isMovingUp = false;
         private bool isMovingDown = false;
         private bool isMovingLeft = false;
         private bool isMovingRight = false;
+
+        /// <summary>
+        /// Instance of the <see cref="System.Windows.Forms.Timer"/> class used to provide the snake movement functionality.
+        /// The key tool to bring dynamic behavior to the game.
+        /// </summary>
         private Timer movementTimer = new Timer();
 
         /// <summary>
@@ -104,6 +137,9 @@ namespace SnakeClassic.PL
         }
 
         /// <summary>
+        /// Form the game result message based on the current score.
+        /// Compares the current score with the best score stored in settings.
+        /// Sets the best score if the current score exceeds it.
         /// Outputs the game result message to the user.
         /// </summary>
         private void ProcessGameResult()
@@ -161,6 +197,7 @@ namespace SnakeClassic.PL
 
         /// <summary>
         /// Processes the increase of the score by one unit.
+        /// Displays the updated score in the score value label.
         /// </summary>
         public void IncreaseScore()
         {

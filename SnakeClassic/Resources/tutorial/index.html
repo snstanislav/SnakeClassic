@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <title>Developers Tutorial: Snake Classic</title>
 </head>
-
 <body>
     <img class="logo" alt="Header logo"
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAABYCAMAAACZKXhcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAwBQTFRFAwAABgAABAYECwAADAAACQwJEAAAFgAAGgAAHAAAFhYLFx8XGyQbIgAAKAAALAAAMgAAPQAANzccKTYpKzkrKzorLDosMUIxNkk2PFA8TQAAXAAAZwAAdwAAZmYzSmJKTGVMUW1RVnJWgAAAntOe//+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7wxRZQAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjM2qefiJQAAAblJREFUeF7tWtlywyAMtNu0dpre932F/v8vFvLgqb0iY8NOxyGrRw3IrFYLgqRyRVhVBAonGHPiUWyIDXoGVFT0lGYEFBsZyaNPFRv0lGYEFBsZyaNPFRv0lGYEFBsZyaNPTWPjAO3TuXvD7RdseE/ZONJgPK+H9vbh3A1415d+vWfoXgmGmQGx0asVFRVDJyoqFZU2XFtJ0oa0IW1IG5ABdbibjUHakDYgA/ViaIfh9gfeRe2nVuieSVExemtqjLRmhLoERrA0GCu07+hqjMF3frDhNkMY455gYBoM+9yIAIm8jLzCg8mLGeD9ByxkoW+CAR2u2NikREUlbUgboRnRhqtzo3co6BTvbn/ShrQhbdg/YUob0kZPG8fLobX+ZSRiNQxehmakAXdjBji5BmOxwXgFoMZIa9SpS2AE62A83KL5DxjeL9PLWEx6jA7GEW6LoVav0P3o3KSeKn1x42dug9GWAaMQNgRjfFVzRkobY19GOPneHmUPNtxCJK5z4z/08Pcb0sau7FTShrSRlIE9kPhOauMCLPzho0G3v/214D2Pv4wkVcnESaU9KUyEP7PhYmNOhBTCxi8Vb0sO3Dx9/QAAAABJRU5ErkJggg==" />
@@ -29,64 +27,39 @@
             <h2>General information</h2>
             <section>
                 <p>
-                    This guide is intended to describe the basic components for creating the game application "Snake
-                    Classic".
+                    This guide is intended to describe the basic components for creating the game application "Snake Classic".
                 </p>
                 <p>
-                    The application created in C# in the Visual Studio .NET development environment as Window Forms
-                    project.
+                    The application created in C# in the Visual Studio .NET development environment as Window Forms project.
                 </p>
                 <p>
-                    To implement the application, a partial case of the MVC (Model-View-Controller) architectural style,
-                    the
-                    Document-View pattern, was selected, which in the project is represented as Business logic layer
-                    (BLL) and Presentation layer (PL) respectively.
+                    To implement the application, a partial case of the MVC (Model-View-Controller) architectural style, the Document-View pattern, was selected, which in the project is represented as Business logic layer (BLL) and Presentation layer (PL) respectively.
                 </p>
                 <p>
-                    The BLL contains the basic classes and data structures of the game, as well as the logic of the game
-                    process.
-                    The PL contains the graphical representation of the game, user interface elements and event handlers
-                    for user control.
+                    The BLL contains the basic classes and data structures of the game, as well as the logic of the game process.
+                    The PL contains the graphical representation of the game, user interface elements and event handlers for user control.
             </section>
         </section>
         <section id="part1">
             <h2>Part 1. BLL: Formation of the basic entities of the game</h2>
             <section>
                 <h3>Basic classes and data structures</h3>
-                <p>The basic entity of the application is the <code class="inline">LocationPoint</code> class. This
-                    class describes simple 2D-point with <var>x</var> and <var>y</var> coordinates. The class has only
-                    properties <code class="inline">X</code> and <code class="inline">Y</code> and one
-                    constructor with two parameters. The class code is
-                    given below.</p>
+                <p>The basic entity of the application is the <code class="inline">LocationPoint</code> class. This class describes simple 2D-point with <var>x</var> and <var>y</var> coordinates. The class has only properties <code class="inline">X</code> and <code class="inline">Y</code> and one constructor with two parameters. The class code is given below.</p>
                 <div id="listing1-1"></div>
 
                 <p>
-                    The <code class="inline">Food</code> class represents a food object. This class contains property of
-                    its own location, constructor and a
-                    <code class="inline">GenerateNewFoodLocation()</code> method that generates randomly new coordinates
-                    of the food. The code for the class is given below.
+                    The <code class="inline">Food</code> class represents a food object. This class contains property of its own location, constructor and a <code class="inline">GenerateNewFoodLocation()</code> method that generates randomly new coordinates of the food. The code for the class is given below.
                 </p>
                 <div id="listing1-2"></div>
                 <p>
-                    The <code class="inline">Snake</code> class is the most functional logic entity in the game.
-                    It contains the colletion <code class="inline">List&lt;LocationPoint&gt; snakeBody</code> and corresponding
-                    property as well as service properties for the snake's constructing: <code
-                        class="inline">InitLength</code> and <code class="inline">SingleSellSize</code>. Thus, the
-                    application data structure is represented by collection, each element of which represents a segment
-                    of the snake.</p>
+                    The <code class="inline">Snake</code> class is the most functional logic entity in the game. It contains the colletion <code class="inline">List&lt;LocationPoint&gt; snakeBody</code> and corresponding property as well as service properties for the snake's constructing: <code class="inline">InitLength</code> and <code class="inline">SingleSellSize</code>. Thus, the application data structure is represented by collection, each element of which represents a segment of the snake.</p>
                 <p>
-                    The <code class="inline">Snake</code> class contains methods for the snake's movement, checking the
-                    collision with itself and boundaries, as well as methods for adding a new segment to the snake's
-                    body
-                    and checking the collision with food. Methods in this class serve to performing every discrete
-                    action and checking in a snake's lifecircle.
-                    The entire class code is given below.
+                    The <code class="inline">Snake</code> class contains methods for the snake's movement, checking the collision with itself and boundaries, as well as methods for adding a new segment to the snake's body and checking the collision with food. Methods in this class serve to performing every discrete action and checking in a snake's lifecircle. The entire class code is given below.
                 </p>
                 <div id="listing1-3"></div>
                 <p>
                     In general, the list contains a collection of points. Each point has two coordinates,
-                    <var>x</var> and <var>y</var>. So the head of the snake has coordinates <var>(x<sub>0</sub>,
-                        y<sub>0</sub>)</var>, the next element
+                    <var>x</var> and <var>y</var>. So the head of the snake has coordinates <var>(x<sub>0</sub>, y<sub>0</sub>)</var>, the next element
                     coordinates <var>(x<sub>1</sub>, y<sub>1</sub>)</var>, and so on.
                 </p>
                 <figure>
@@ -97,22 +70,13 @@
             <section>
                 <h3>Collision with boundaries</h3>
                 <p>
-                    The snake's movement is performed by changing the coordinates of the head and the body segments
-                    according to the direction of movement. The snake's head is always the first element in the list.
-                    The snake's body is represented by a collection of points, each of which has its own coordinates.
-                    The snake's movement is performed by changing the coordinates of the head and the body segments
-                    according to the direction of movement.
+                    The snake's movement is performed by changing the coordinates of the head and the body segments according to the direction of movement. The snake's head is always the first element in the list. The snake's body is represented by a collection of points, each of which has its own coordinates. The snake's movement is performed by changing the coordinates of the head and the body segments according to the direction of movement.
                 </p>
                 <p>
-                    When colliding with walls (panel borders), a message about the end of the game and the number of
-                    points scored should be displayed.
-                    The collision check is checked in the conditions located in the movement methods.
+                    When colliding with walls (panel borders), a message about the end of the game and the number of points scored should be displayed. The collision check is checked in the conditions located in the movement methods.
                 </p>
                 <p>E.g. for the 10pt width snake movement on the 300x300pt panel the
-                    extreme coordinate is 290 in <code class="inline">X</code> and <code class="inline">Y</code>. This
-                    is due to the fact that the
-                    coordinates of each element (cell) are the upper left corner. Thus,
-                    if the "head" reached the coordinate 300, it would go beyond the panel boundaries.</p>
+                    extreme coordinate is 290 in <code class="inline">X</code> and <code class="inline">Y</code>. This is due to the fact that the coordinates of each element (cell) are the upper left corner. Thus, if the "head" reached the coordinate 300, it would go beyond the panel boundaries.</p>
                 <figure>
                     <img alt="Collision scheme" src="data:image/png;base64,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" />
                     <figcaption>Fig.2. Collision scheme example</figcaption>
@@ -123,12 +87,8 @@
         <section id="part2">
             <h2>Part 2. PL: The structure of the GameForm class. Connection with BLL</h2>
             <section>
-                <p>The most important window of the application is <code class="inline">GameForm</code>, which contains
-                    above all the <code class="inline">mainGamePanel</code>, on which the game objects are drawn and
-                    moved. Other WinForms elements are responsible for the game control and the output of a current
-                    state.</p>
-                <p>Methods in this Form class responsible for the game process can be roughly divided into the following
-                    categories:
+                <p>The most important window of the application is <code class="inline">GameForm</code>, which contains above all the <code class="inline">mainGamePanel</code>, on which the game objects are drawn and moved. Other WinForms elements are responsible for the game control and the output of a current state.</p>
+                <p>Methods in this Form class responsible for the game process can be roughly divided into the following categories:
                 <ul>
                     <li>initializing and reset,</li>
                     <li>checking and changing of the current game's state</li>
@@ -141,9 +101,7 @@
                     below.</p>
                 <div id="listing2-1"></div>
                 <p>The methods from the second category (as well as movement handle) are actually a connection between
-                    presentation layer and business logic of classes <code class="inline">Snake</code> and <code
-                        class="inline">Food</code>, included in the <code class="inline">GameForm</code> class by means
-                    of the composition relation.</p>
+                    presentation layer and business logic of classes <code class="inline">Snake</code> and <code class="inline">Food</code>, included in the <code class="inline">GameForm</code> class by means of the composition relation.</p>
                 <div id="listing2-2"></div>
             </section>
         </section>
@@ -158,15 +116,9 @@
             <section>
                 <h3>Difficulty level selection. Speed adjustment</h3>
                 <p>
-                    This opens a dialog box in which it is offered to choose one of six difficulty levels. The choice of
-                    level is offered at the beginning of the game, when a player selects "Start new game".
+                    This opens a dialog box in which it is offered to choose one of six difficulty levels. The choice of level is offered at the beginning of the game, when a player selects "Start new game".
                 </p>
-                <p>In the listing below, the code responsible for displaying the level selection is presented. The
-                    variable <code class="inline">currentLevelSleepInterval</code> sets the duration of the delay for
-                    the timer. Thus, the larger the value of <code class="inline">currentLevelSleepInterval</code>, the
-                    longer the time interval between steps, and the slower the speed of movement. Each condition block
-                    checks which <code class="inline">RadioButton</code> was selected and depending on this, the
-                    corresponding delay is set, and the number of the selected level is written in the <code
+                <p>In the listing below, the code responsible for displaying the level selection is presented. The variable <code class="inline">currentLevelSleepInterval</code> sets the duration of the delay for the timer. Thus, the larger the value of <code class="inline">currentLevelSleepInterval</code>, the longer the time interval between steps, and the slower the speed of movement. Each condition block checks which <code class="inline">RadioButton</code> was selected and depending on this, the corresponding delay is set, and the number of the selected level is written in the <code
                         class="inline">levelValueLabel</code> field.
                     After this, the dialog box closes and the game starts.</p>
                 <div id="listing3-2"></div>
@@ -174,13 +126,10 @@
             <section>
                 <h3>Movement methods</h3>
                 <p>The movement of the snake is provided by means of <code
-                        class="inline">System.Windows.Forms.Timer</code> and was realised in the couples of methods for
-                    each direction. Four flag variables <code class="inline">private bool isMovingUp</code>, <code
+                        class="inline">System.Windows.Forms.Timer</code> and was realised in the couples of methods for each direction. Four flag variables <code class="inline">private bool isMovingUp</code>, <code
                         class="inline">private bool isMovingDown</code>, <code
                         class="inline">private bool isMovingLeft</code>, <code
-                        class="inline">private bool isMovingRight</code> are declared in advance to determine the
-                    current direction when the corresponding key is pressed. As the example the moving "Down" methods
-                    are given below. The methods for three other directions are similar.</p>
+                        class="inline">private bool isMovingRight</code> are declared in advance to determine the current direction when the corresponding key is pressed. As the example the moving "Down" methods are given below. The methods for three other directions are similar.</p>
                 <div id="listing3-3"></div>
             </section>
             <section>
@@ -188,10 +137,7 @@
                 <p>Control is provided via the keyboard. For this, the KeyDown event handler for the form is used.</p>
                 <p>The snake movement direction is changed by pressing the standard keys <kbd>&uarr;</kbd>,
                     <kbd>&darr;</kbd>,
-                    <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>. An alternative set of keys is also used: <kbd>W</kbd> (up),
-                    <kbd>S</kbd> (down), <kbd>A</kbd> (left), <kbd>D</kbd> (right). The handler contains four blocks of
-                    conditions for each direction, as well as game pausing by means of the <kbd>Space</kbd> key. The
-                    entire handler code is given below.
+                    <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>. An alternative set of keys is also used: <kbd>W</kbd> (up), <kbd>S</kbd> (down), <kbd>A</kbd> (left), <kbd>D</kbd> (right). The handler contains four blocks of conditions for each direction, as well as game pausing by means of the <kbd>Space</kbd> key. The entire handler code is given below.
                 </p>
                 <div id="listing3-4"></div>
             </section>
@@ -200,8 +146,7 @@
         <section id="part4">
             <h2>Part 4. The rest of the GameForm class members</h2>
             <section>
-                <p>In addition to the above, the <code class="inline">GameForm</code> class contains several other
-                    members, which are responsible for additional tasks of application.</p>
+                <p>In addition to the above, the <code class="inline">GameForm</code> class contains several other members, which are responsible for additional tasks of application.</p>
                 <div id="listing4-1"></div>
                 <p>Thus, the <code class="inline">GameForm</code> class is responsible for managing the game state, handling user input, and updating the game display.</p>
             </section>
@@ -210,5 +155,4 @@
     </article>
     <br /><br />
 </body>
-
 </html>

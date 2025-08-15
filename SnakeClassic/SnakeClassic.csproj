@@ -175,7 +175,6 @@
     <EmbeddedResource Include="Resources\tutorial\styles.css" />
     <EmbeddedResource Include="Resources\tutorial\images\coords.PNG" />
     <EmbeddedResource Include="Resources\tutorial\images\header-logo.PNG" />
-    <EmbeddedResource Include="Resources\tutorial\images\level-dialog.PNG" />
     <EmbeddedResource Include="Resources\tutorial\images\scheme-collision.PNG" />
     <Content Include="Resources\tutorial\images\base64-pics.txt" />
     <Content Include="Resources\wall-pic.png" />
