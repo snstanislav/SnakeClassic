@@ -12,16 +12,35 @@ using System.Windows.Forms;
 
 namespace SnakeClassic.PL
 {
+    /// <summary>
+    /// Represents a form that displays a developers tutorial for the Snake Classic game.
+    /// </summary>
+    /// <remarks>Legacy part of the application from v.1.0 (2011)</remarks>
     public partial class TutorialForm : Form
     {
+        /// <summary>
+        /// <value>Property <c>TUTORIAL_PAGE_PATH</c></value> and 
+        /// <value>property <c>TUTORIAL_STYLE_PATH</c></value>
+        /// Constants representing paths to the HTML and CSS files of the tutorial. 
+        /// Saved internally in the project as embedded resource.
+        /// </summary>
         private const string TUTORIAL_PAGE_PATH = "SnakeClassic.Resources.tutorial.index.html";
         private const string TUTORIAL_STYLE_PATH = "SnakeClassic.Resources.tutorial.styles.css";
+
+        /// <summary>
+        /// Initializes the <see cref="TutorialForm"/> and invokes the tutotrial loading method.
+        /// </summary>
         public TutorialForm()
         {
             InitializeComponent();
             LoadTutorialDocument();
         }
 
+        /// <summary>
+        /// Loads a document from the embedded resources.
+        /// </summary>
+        /// <param name="resourceName">Represents a path to the document.</param>
+        /// <returns>Returns raw content of the document.</returns>
         private string LoadHtmlFromResource(string resourceName)
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -32,6 +51,11 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Loads HTML and CSS documents of the tutorial.
+        /// Injects CSS styles into HTML.
+        /// Invokes the method to inject source code listings into the HTML content.
+        /// </summary>
         private void LoadTutorialDocument()
         {
             try
@@ -55,6 +79,11 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Injeckts code listings into the HTML content of the tutorial.
+        /// Writes the modified HTML to a file and navigates the web browser to it.
+        /// </summary>
+        /// <param name="html">Represents previously loaded HTML document as string.</param>
         private void LoadCodeListingsIntoTutorial(string html)
         {
             // inject code snippets

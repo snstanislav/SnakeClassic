@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace SnakeClassic.PL
 {
+    /// <summary>
+    /// Represents a form that allows the user to select a difficulty level for the game.
+    /// </summary>
     public partial class LevelForm : Form
     {
         public const string LEVEL_1 = "1";
@@ -24,7 +27,16 @@ namespace SnakeClassic.PL
             InitializeComponent();
         }
 
+        /// <summary>
+        /// <value>Property <c>SelectedLevel</c> represents selected difficulty level</value>
+        /// </summary>
         public string SelectedLevel { get; private set; }
+
+        /// <summary>
+        /// Sets the selected difficulty level based on the user's choice in the radio buttons.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void levelConformButton_Click(object sender, EventArgs e)
         {
             if (levelRadioButton1.Checked)

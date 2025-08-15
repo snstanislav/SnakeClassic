@@ -6,27 +6,53 @@ using System.Windows.Forms;
 
 namespace SnakeClassic.PL
 {
+    /// <summary>
+    /// Represents the main game form for the Snake Classic game.
+    /// Provides the functionality and user control of the game.
+    /// Manages the game state. Performs rendering of the game objects.
+    /// </summary>
     public partial class GameForm : Form
     {
-        Food food;
-        Snake snake;
-        private Timer movementTimer = new Timer();
+        private const string PAUSE_MSG = "Press Space to pause";
+        private const string CONTINUE_MSG = "Press control key to continue";
+
+        /// <summary>
+        /// Predefined sleep intervals for different game levels.
+        /// </summary>
         private enum LevelSleepInterval : int
         { First = 400, Second = 300, Third = 200, Fourth = 150, Fifth = 100, Sixth = 50 }
+
+        /// <summary>
+        /// Predefined borders of the game field.
+        /// </summary>
+        private enum borders : int
+        { Top = 0, Bottom = 600, Left = 0, Right = 600 }
+
+        private Food food;
+        private Snake snake;
+
         private int currentLevelSleepInterval;
         private bool isKeyPressAllowed = false;
         private bool isMovingUp = false;
         private bool isMovingDown = false;
         private bool isMovingLeft = false;
         private bool isMovingRight = false;
+        private Timer movementTimer = new Timer();
 
-        private enum borders : int
-        { Top = 0, Bottom = 600, Left = 0, Right = 600 }
+        /// <summary>
+        /// Predefined the constant for the game field size.
+        /// </summary>
         private const int FIELD_SELL = 20;
-        private const int SINGLE_SELL = 18;
-        private const string PAUSE_MSG = "Press Space to pause";
-        private const string CONTINUE_MSG = "Press control key to continue";
 
+        /// <summary>
+        /// Predefined the constant for the single cell size of the snake and the food.
+        /// </summary>
+        private const int SINGLE_SELL = 18;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameForm"/> class  and sets up the game panel.
+        /// initializes the snake and food objects.
+        /// </summary>
         public GameForm()
         {
             InitializeComponent();
@@ -39,11 +65,17 @@ namespace SnakeClassic.PL
             InitSnake();
         }
 
+        /// <summary>
+        /// Initializes the snake with a default length, head position, and predefined cell size.
+        /// </summary>
         private void InitSnake()
         {
             snake = new Snake(3, 100, 200, FIELD_SELL);
         }
 
+        /// <summary>
+        /// Clears the current movement state of the snake.
+        /// </summary>
         private void ClearMovementState()
         {
             movementTimer.Tick -= MoveUpTick;
@@ -55,6 +87,10 @@ namespace SnakeClassic.PL
             isMovingRight = false;
             isMovingLeft = false;
         }
+
+        /// <summary>
+        /// Resets the game state after "Game Over".
+        /// </summary>
         private void GameOverState()
         {
             movementTimer.Stop();
@@ -67,6 +103,9 @@ namespace SnakeClassic.PL
             pauseLabel.Text = "GAME OVER";
         }
 
+        /// <summary>
+        /// Outputs the game result message to the user.
+        /// </summary>
         private void ProcessGameResult()
         {
             string resutlMsg = $"\tGAME OVER!\n\n\t Score: {scoreValueLabel.Text}";
@@ -80,6 +119,10 @@ namespace SnakeClassic.PL
             MessageBox.Show(resutlMsg);
         }
 
+        /// <summary>
+        /// Checks if the snake has collided with itself.
+        /// Invokes the GameOverState method if a collision is detected.
+        /// </summary>
         private void CheckSnakeSelfCollide()
         {
             if (snake.IsSelfCollided())
@@ -88,6 +131,10 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Checks if the snake has caught the food.
+        /// Increases the score and generates a new food location if caught.
+        /// </summary>
         private void CheckCatchFood()
         {
             if (snake.IsFoodCatched(food.Location))
@@ -98,6 +145,10 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Processes the generation of a new food location. 
+        /// If the new food location occurs on the snake's body generates a new location again recursively.
+        /// </summary>
         private void ManageNewFoodLocation()
         {
             food.GenerateNewFoodLocation((int)borders.Top, (int)borders.Bottom,
@@ -107,6 +158,10 @@ namespace SnakeClassic.PL
                 ManageNewFoodLocation();
             }
         }
+
+        /// <summary>
+        /// Processes the increase of the score by one unit.
+        /// </summary>
         public void IncreaseScore()
         {
             int currentScore = Convert.ToInt32(scoreValueLabel.Text);
@@ -114,6 +169,10 @@ namespace SnakeClassic.PL
             scoreValueLabel.Text = Convert.ToString(currentScore);
         }
 
+        /// <summary>
+        /// Renders the food on the game panel. 
+        /// Object is drawn using the System.Drawing.Graphics class.
+        /// </summary>
         private void DrawFood()
         {
             using (Graphics graphics = mainGamePanel.CreateGraphics())
@@ -122,14 +181,19 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Renders the snake on the game panel. 
+        /// Invokes the DrawFood method to draw the food object during the snake rendering.
+        /// Objects are drawn using the System.Drawing.Graphics class.
+        /// </summary>
         private void DrawSnake()
         {
             using (Graphics graphics = mainGamePanel.CreateGraphics())
             {
                 Refresh();
                 DrawFood();
-                graphics.FillRectangle(Brushes.Orange, snake.SnakeBody[0].X, snake.SnakeBody[0].Y, SINGLE_SELL, SINGLE_SELL);
 
+                graphics.FillRectangle(Brushes.Orange, snake.SnakeBody[0].X, snake.SnakeBody[0].Y, SINGLE_SELL, SINGLE_SELL);
                 for (int i = 0; i < snake.SnakeBody.Count; i++)
                 {
                     if (snake.SnakeBody[i] != null)
@@ -140,6 +204,11 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Starts the snake movement in the upward direction.
+        /// Sets timer interval based on the current level sleep interval.
+        /// Starts the movement timer and assigns the MoveUpTick method to handle the timer ticks.
+        /// </summary>
         private void StartMovingUp()
         {
             ClearMovementState();
@@ -150,6 +219,11 @@ namespace SnakeClassic.PL
             movementTimer.Start();
         }
 
+        /// <summary>
+        /// Provides a single step movement of the snake in the upward direction.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoveUpTick(object sender, EventArgs e)
         {
             if (isMovingUp)
@@ -169,6 +243,11 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Starts the snake movement in the downward direction.
+        /// Sets timer interval based on the current level sleep interval.
+        /// Starts the movement timer and assigns the MoveDownTick method to handle the timer ticks.
+        /// </summary>
         private void StartMovingDown()
         {
             ClearMovementState();
@@ -179,6 +258,11 @@ namespace SnakeClassic.PL
             movementTimer.Start();
         }
 
+        /// <summary>
+        /// Provides a single step movement of the snake in the downward direction.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoveDownTick(object sender, EventArgs e)
         {
             if (isMovingDown)
@@ -197,6 +281,12 @@ namespace SnakeClassic.PL
                 }
             }
         }
+
+        /// <summary>
+        /// Starts the snake movement in the left direction.
+        /// Sets timer interval based on the current level sleep interval.
+        /// Starts the movement timer and assigns the MoveLeftTick method to handle the timer ticks.
+        /// </summary>
         private void StartMovingLeft()
         {
             ClearMovementState();
@@ -207,6 +297,11 @@ namespace SnakeClassic.PL
             movementTimer.Start();
         }
 
+        /// <summary>
+        /// Provides a single step movement of the snake in the left direction.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoveLeftTick(object sender, EventArgs e)
         {
             if (isMovingLeft)
@@ -226,6 +321,11 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Starts the snake movement in the right direction.
+        /// Sets timer interval based on the current level sleep interval.
+        /// Starts the movement timer and assigns the MoveRightTick method to handle the timer ticks.
+        /// </summary>
         private void StartMovingRight()
         {
             ClearMovementState();
@@ -236,6 +336,11 @@ namespace SnakeClassic.PL
             movementTimer.Start();
         }
 
+        /// <summary>
+        /// Provides a single step movement of the snake in the right direction.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoveRightTick(object sender, EventArgs e)
         {
             if (isMovingRight)
@@ -255,6 +360,13 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Provides the key event handler for user game control.
+        /// Invokes the appropriate movement methods based on the key pressed.
+        /// Performs the pause functionality when the space key is pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (isKeyPressAllowed)
@@ -303,6 +415,13 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Performs the game start functionality when the "Start" menu item is clicked.
+        /// Provides the level selection dialog to the user.
+        /// Sets the initial game state, invokes methods to start the game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
             movementTimer = new Timer();
@@ -350,6 +469,11 @@ namespace SnakeClassic.PL
             pauseLabel.Text = PAUSE_MSG;
         }
 
+        /// <summary>
+        /// Provides the functionality to clear the best score record.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show("\tAre you sure??",
@@ -363,7 +487,11 @@ namespace SnakeClassic.PL
             movementTimer.Start();
         }
 
-
+        /// <summary>
+        /// Pauses the game when the "Game" menu item is clicked to open.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isKeyPressAllowed)
@@ -373,6 +501,11 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Ends the game safely when the user closes the <see cref="GameForm"/> after confirmation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (isKeyPressAllowed)
@@ -394,6 +527,11 @@ namespace SnakeClassic.PL
             }
         }
 
+        /// <summary>
+        /// Reads the best score from the settings and displays it when the <see cref="GameForm"/> loads. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameForm_Load(object sender, EventArgs e)
         {
             recordValueLabel.Text = Properties.Settings.Default.BestScore.ToString();
