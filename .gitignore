@@ -46,3 +46,6 @@ Desktop.ini
 *.exe
 *.dll
 *.pdb
+
+# Exception for the unit test project
+!/SnakeClassic.Tests/

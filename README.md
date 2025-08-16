@@ -1,9 +1,10 @@
 # SnakeGame
 
 **A classic Snake arcade game built in C# WinForms.**  
-Eat, grow, avoid walls — and your own tail.
+Eat, grow, avoid walls and your own tail.
 
-![Game window](images/game-window.png)
+Game window:
+<img src="images/game-window.png" alt="Game window" style="max-width:none;">
 
 ---
 
@@ -21,6 +22,7 @@ Eat, grow, avoid walls — and your own tail.
 - **C#**
 - **Windows Forms (WinForms)**
 - **.NET Framework 4.8**
+- **Developed with Microsoft Visual Studio**
 
 ---
 
