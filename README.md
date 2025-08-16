@@ -3,8 +3,8 @@
 **A classic Snake arcade game built in C# WinForms.**  
 Eat, grow, avoid walls and your own tail.
 
-Game window:
-<img src="images/game-window.png" alt="Game window" style="width:897px; height:787px;">
+
+<img src="images/game-window.png" alt="Game window" width="897" height="787">
 
 ---
 
