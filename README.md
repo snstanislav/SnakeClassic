@@ -4,7 +4,7 @@
 Eat, grow, avoid walls and your own tail.
 
 Game window:
-<img src="images/game-window.png" alt="Game window" style="width:897px; heigth:787px;">
+<img src="images/game-window.png" alt="Game window" style="width:897px; height:787px;">
 
 ---
 
